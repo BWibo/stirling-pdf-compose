@@ -1,0 +1,1 @@
+tessdata/deu.traineddata filter=lfs diff=lfs merge=lfs -text
