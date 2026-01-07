@@ -1,7 +1,7 @@
-version: "3.8"
 services:
   stirling-pdf:
-    image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+    image: ghcr.io/stirling-tools/stirling-pdf:2.1.5-fat
+    # image: ghcr.io/stirling-tools/stirling-pdf:1.6.0-fat
     # No ports exposed to host - only accessible via proxy
     expose:
       - "8080"
@@ -24,7 +24,11 @@ services:
       SERVER_SERVLET_CONTEXTPATH: /pdf
       SERVER_SERVLET_SESSION_COOKIE_PATH: /pdf
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8080/pdf/api/v1/info/status | grep -q 'UP' && curl -fL http://localhost:8080/pdf/ | grep -qv 'Please sign in'"]
+      test:
+        [
+          "CMD-SHELL",
+          "curl -f http://localhost:8080/pdf/api/v1/info/status | grep -q 'UP' && curl -fL http://localhost:8080/pdf/ | grep -qv 'Please sign in'",
+        ]
       interval: 5s
       timeout: 10s
       retries: 16

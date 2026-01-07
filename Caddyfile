@@ -7,7 +7,7 @@ devleco.dom.local {
 	# tls your-email@example.com
 
 	# Handle /pdf subpath
-	handle_path /pdf* {
+	handle /pdf* {
 		# Increase timeouts for PDF processing operations
 		# This allows for longer processing times on large PDFs
 		@timeout {
@@ -74,23 +74,3 @@ devleco.dom.local {
 		format json
 	}
 }
-
-# Alternative configuration for localhost/IP access (HTTP only)
-# Uncomment this block if you want to access via localhost or IP
-# :8081 {
-#     request_body {
-#         max_size 500MB
-#     }
-#
-#     reverse_proxy stirling-pdf:8080 {
-#         transport http {
-#             dial_timeout 30s
-#             response_header_timeout 300s
-#             read_timeout 600s
-#             write_timeout 600s
-#         }
-#         flush_interval -1
-#     }
-#
-#     encode gzip zstd
-# }
